@@ -1,10 +1,19 @@
 import React from 'react';
 import RailList from './RailList';
 import AppHeader from './AppHeader';
+import axios from 'axios';
 
 class App extends React.Component {
 
-    state = {selectedCards: []};
+    state = {cards: [], selectedCards: []};
+
+    componentDidMount = async() => {
+        //load the rails via axios
+        const response = await axios.get(process.env.PUBLIC_URL + "./rail-card-items.json");
+        this.setState({
+            cards: response.data.items
+        });
+    }
 
     onClickHandler = (card) => {
         //console.log(card.target.id);
@@ -39,7 +48,7 @@ class App extends React.Component {
                     </div>
                     <div className="column">
                         <div className="ui right very close rail">
-                            <RailList onClick={this.onClickHandler} />
+                            <RailList onClick={this.onClickHandler} cards={this.state.cards}/>
                         </div>
                     </div>
                     

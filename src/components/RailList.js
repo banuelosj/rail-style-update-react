@@ -4,8 +4,9 @@ import RailCard from './RailCard';
 const RailList = (props) => {
     return (
         <div>
-            <RailCard text="Rail_1" onClick={props.onClick}/>
-            <RailCard key="Rail_2"  text="Rail_2" onClick={props.onClick}/>
+            {props.cards.map((card, idx) => (
+                <RailCard text={card.name} key={`#${card.name} - #${idx}`} onClick={props.onClick} />
+            ))}
         </div>
     );
 };
